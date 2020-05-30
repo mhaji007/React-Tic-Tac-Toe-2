@@ -7,58 +7,35 @@ class App extends Component {
     super();
     this.state = {
       board:Array(9).fill(null),
-      player: "X"
+      player: "X",
+      winner: null
     }
   }
 
-  // checkWinner = () => {
-  //   let winLines = [
-  //     ["0","1","2"],
-  //     ["3","4","5"],
-  //     ["6","7","8"],
-  //     ["0","3","6"],
-  //     ["1","4","7"],
-  //     ["2","5","8"],
-  //     ["0","4","8"],
-  //     ["2","4","6"],
-  //   ]
+  checkWinner = () => {
+    let winLines = [
+      ["0","1","2"],
+      ["3","4","5"],
+      ["6","7","8"],
+      ["0","3","6"],
+      ["1","4","7"],
+      ["2","5","8"],
+      ["0","4","8"],
+      ["2","4","6"],
+    ]
 
-  //   for (let index=0; index<winLines.length; index++) {
-  //     const [a,b,c] = winLines[index];
-  //     if(this.state.board[a] && this.state.board[a] === this.state.board[b] && this.state.board[b] === this.state.board[c]){
-  //       alert('You won!')
-  //     }
-  //   }
-
-  // }
-
-  checkWinner() {
-    let winLines =
-      [
-        ["0", "1", '2'],
-        ["3", "4", '5'],
-        ["6", "7", '8'],
-        ["0", "3", '6'],
-        ["1", "4", '7'],
-        ["2", "5", '8'],
-        ["0", "4", '8'],
-        ["2", "4", '6'],
-      ]
-    this.checkMatch(winLines)
-  }
-
-  checkMatch(winLines) {
-    for (let index = 0; index < winLines.length; index++) {
-      const [a, b, c] = winLines[index];
-      let board = this.state.board
-      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        alert('You won');
+    for (let index=0; index<winLines.length; index++) {
+      const [a,b,c] = winLines[index];
+      if(this.state.board[a] && this.state.board[a] === this.state.board[b] && this.state.board[b] === this.state.board[c]){
+        alert('You won!')
         this.setState({
-          winner: this.state.player
-        })
+        winner: this.state.player
+          })
       }
     }
+
   }
+
 
   
 
@@ -67,19 +44,17 @@ class App extends Component {
     //let newBoard =[...this.state.board] this line messes up the winning logic for some reason
     console.log(index)
     
-    if (!this.state.board[index]){
+    if (!this.state.board[index] && !this.state.winner){
       newBoard[index] = this.state.player
-
+  
+      this.setState({
+        board: newBoard,
+        player: this.state.player === "X" ? "O" : "X"
+      })
+  
+      this.checkWinner();
     }
 
-    let newPlayer = this.state.player === "X" ? "O" : "X";
-
-    this.setState({
-      board: newBoard,
-      player: newPlayer
-    })
-
-    this.checkWinner();
   }
 
     render() {
