@@ -11,9 +11,62 @@ class App extends Component {
     }
   }
 
+  // checkWinner = () => {
+  //   let winLines = [
+  //     ["0","1","2"],
+  //     ["3","4","5"],
+  //     ["6","7","8"],
+  //     ["0","3","6"],
+  //     ["1","4","7"],
+  //     ["2","5","8"],
+  //     ["0","4","8"],
+  //     ["2","4","6"],
+  //   ]
+
+  //   for (let index=0; index<winLines.length; index++) {
+  //     const [a,b,c] = winLines[index];
+  //     if(this.state.board[a] && this.state.board[a] === this.state.board[b] && this.state.board[b] === this.state.board[c]){
+  //       alert('You won!')
+  //     }
+  //   }
+
+  // }
+
+  checkWinner() {
+    let winLines =
+      [
+        ["0", "1", '2'],
+        ["3", "4", '5'],
+        ["6", "7", '8'],
+        ["0", "3", '6'],
+        ["1", "4", '7'],
+        ["2", "5", '8'],
+        ["0", "4", '8'],
+        ["2", "4", '6'],
+      ]
+    this.checkMatch(winLines)
+  }
+
+  checkMatch(winLines) {
+    for (let index = 0; index < winLines.length; index++) {
+      const [a, b, c] = winLines[index];
+      let board = this.state.board
+      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+        alert('You won');
+        this.setState({
+          winner: this.state.player
+        })
+      }
+    }
+  }
+
+  
+
   handleClick = (index) => {
-    let newBoard =[...this.state.board]
+    let newBoard = this.state.board
+    //let newBoard =[...this.state.board] this line messes up the winning logic for some reason
     console.log(index)
+    
     if (!this.state.board[index]){
       newBoard[index] = this.state.player
 
@@ -25,6 +78,8 @@ class App extends Component {
       board: newBoard,
       player: newPlayer
     })
+
+    this.checkWinner();
   }
 
     render() {
