@@ -9,6 +9,9 @@ class App extends Component {
                 <h1>
                     Tic Tac Toe App
                 </h1>
+                <div className = "box">
+                
+                </div>
             </div>
         );
     }
