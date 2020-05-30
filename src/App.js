@@ -12,10 +12,12 @@ class App extends Component {
   }
 
   handleClick = (index) => {
-    console.log(index)
-    
     let newBoard =[...this.state.board]
-    newBoard[index] = this.state.player
+    console.log(index)
+    if (!this.state.board[index]){
+      newBoard[index] = this.state.player
+
+    }
 
     let newPlayer = this.state.player === "X" ? "O" : "X";
 
