@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import Player from './components/ChoosePlayer';
 
 class App extends Component {
 
@@ -64,6 +65,7 @@ class App extends Component {
                 <h1>
                     Tic Tac Toe App
                 </h1>
+                <Player/>
                 <div className="board">
                   {Box}
                 </div>
